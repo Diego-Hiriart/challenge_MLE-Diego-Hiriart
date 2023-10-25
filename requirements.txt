@@ -1,4 +1,6 @@
 fastapi~=0.86.0
+starlette~=0.20.4
+anyio~=3.7.1
 pydantic~=1.10.2
 uvicorn~=0.15.0
 numpy~=1.26.1
