@@ -18,7 +18,13 @@ class DelayModel:
     
     # Method for feature generation    
     def get_min_diff(self, data):
+        # Fill with dummy data if there is none
+        if 'Fecha-O' not in data:
+            data['Fecha-O'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         fecha_o = datetime.strptime(data['Fecha-O'], '%Y-%m-%d %H:%M:%S')
+        # Fill with dummy data if there is none
+        if 'Fecha-I' not in data:
+            data['Fecha-I'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         fecha_i = datetime.strptime(data['Fecha-I'], '%Y-%m-%d %H:%M:%S')
         min_diff = ((fecha_o - fecha_i).total_seconds())/60
         return min_diff
@@ -54,11 +60,8 @@ class DelayModel:
             pd.get_dummies(data['MES'], prefix = 'MES')], 
             axis = 1
         )
-        # Get data balance
-        _, _, y_train, _ = train_test_split(features, data['delay'], test_size = 0.33, random_state = 42)
-        n_y0 = len(y_train[y_train == 0])
-        n_y1 = len(y_train[y_train == 1])
-        self._dataScale = n_y0/n_y1
+        # Data balance, from "exploration.ipynb"
+        self._dataScale = 4.4402380952380955
         # Extract 10 most important features
         top_10_features = [
             "OPERA_Latin American Wings", 
@@ -72,6 +75,10 @@ class DelayModel:
             "OPERA_Sky Airline",
             "OPERA_Copa Air"
         ]
+        # If features processed so far do not have any of the top_10_features, fill with 0
+        for feature in top_10_features:
+            if feature not in features:
+                features[feature] = 0
         features = features[top_10_features]
         # Return processed data, return target column if specified
         # Check if column exists, return target column if so
