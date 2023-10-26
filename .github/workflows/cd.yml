@@ -1,7 +1,16 @@
 name: 'Continuous Delivery'
 
+# Deploy new version when main has a new version
 on:
-  ...
+  push:
+    branches:
+      - main
 
+      #Build and deploy docker
 jobs:
-  ...
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build and deploy
+        uses: actions/checkout@v4
