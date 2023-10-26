@@ -1,0 +1,43 @@
+name: 'Continuous Integration'
+
+# Execute testing on push to development and main branches
+on: 
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  # Test model and api
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Use ptyhon 3.12
+      - uses: actions/checkout@v4
+      - name: Python set up
+        uses: actions/checkout@v4
+        with: 
+          python-version: '3.12'
+      # Install requirements for running and testing
+      - name: install dependencies
+        run: | 
+          pip install -r requirements-test.txt 
+          pip install -r requirements.txt
+      # Test model
+      - name: test model
+        run: |
+          mkdir reports || true
+          pytest --cov-config=.coveragerc --cov-report term --cov-report html:reports/html --cov-report xml:reports/coverage.xml --junitxml=reports/junit.xml --cov=challenge tests/model
+      # Test api
+      - name: test api
+        run: |
+          mkdir reports || true
+          pytest --cov-config=.coveragerc --cov-report term --cov-report html:reports/html --cov-report xml:reports/coverage.xml --junitxml=reports/junit.xml --cov=challenge tests/api
+  # Build test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker build test
+        run: docker build -t mle-diegohiriart .
+      
