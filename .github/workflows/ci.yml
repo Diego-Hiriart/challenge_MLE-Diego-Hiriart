@@ -3,7 +3,7 @@ name: 'Continuous Integration'
 on: 
   # Execute testing on push to development, main, and release branches
   push:
-    branches: ["main", "develop", "release/"]
+    branches: ["main", "develop", "release/*", "feature/*"]
   # Execute when pulling to main
   pull_request:
     branches: ["main"]
