@@ -30,7 +30,6 @@ jobs:
         run: |
           python3 -m venv .venv
           source .venv/bin/activate
-          echo '${{ github.workspace }}'
       # Install requirements for running and testing
       - name: install dependencies
         run: |
@@ -38,7 +37,10 @@ jobs:
           pip install --no-cache-dir --upgrade -r requirements-test.txt
       # Test model
       - name: test model
-        run: make model-test
+        # Must copy data folder one directory above to ensure tests find it
+        run: |
+          cp -r data ../ 
+          make model-test
       # Test api and close venv
       - name: test api
         run: |
