@@ -25,6 +25,11 @@ jobs:
         uses: actions/checkout@v4
         with: 
           python-version: '3.12'
+      # Create and activate venv for testing
+      - name: venv
+        run: |
+          python -m venv tutorial_env
+          .venv/bin/activate
       # Install requirements for running and testing
       - name: install dependencies
         run: |
@@ -33,9 +38,11 @@ jobs:
       # Test model
       - name: test model
         run: make model-test
-      # Test api
+      # Test api and close venv
       - name: test api
-        run: make api-test
+        run: |
+          make api-test
+          .venv/bin/deactivate
   
   # Build test on Google Cloud Run
   build:
