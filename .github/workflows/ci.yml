@@ -45,7 +45,7 @@ jobs:
       - name: test api
         run: |
           make api-test
-          source .venv/bin/deactivate
+          deactivate
   
   # Build test on Google Cloud Run
   build:
