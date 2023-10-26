@@ -30,10 +30,7 @@ jobs:
         run: |
           python3 -m venv .venv
           source .venv/bin/activate
-          python3
-          import os
-          print(os.getcwd())
-          exit()
+          echo '${{ github.workspace }}'
       # Install requirements for running and testing
       - name: install dependencies
         run: |
