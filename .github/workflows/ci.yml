@@ -28,7 +28,7 @@ jobs:
       # Create and activate venv for testing
       - name: venv
         run: |
-          python -m venv tutorial_env
+          python -m venv .venv
           .venv/bin/activate
       # Install requirements for running and testing
       - name: install dependencies
