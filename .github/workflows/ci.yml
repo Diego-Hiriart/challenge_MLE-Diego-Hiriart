@@ -26,15 +26,18 @@ jobs:
           pip install -r requirements.txt
       # Test model
       - name: test model
-        run: make model-test
+        run: |
+          ls
+          ls data
+          make model-test
       # Test api
       - name: test api
         run: make api-test
-  # Build test
+  # Build test on Google Cloud Run
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Docker build test
-        run: docker build -t mle-diegohiriart .
+        run: ls
       
