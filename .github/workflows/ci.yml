@@ -9,10 +9,10 @@ on:
     branches: ["main"]
 
 env:
-  PROJECT_ID: '${{ secrets.PROJECT_ID }}'
-  GAR_LOCATION: '${{ secrets.GAR_LOCATION }}'
-  SERVICE: '${{ secrets.SERVICE }}'
-  REGION: '${{ secrets.REGION }}'
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
+  SERVICE: ${{ secrets.SERVICE }}
+  REGION: ${{ secrets.REGION }}
 
 jobs:
   # Test model and api
