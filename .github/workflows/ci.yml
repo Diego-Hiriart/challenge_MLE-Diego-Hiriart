@@ -1,12 +1,12 @@
 name: 'Continuous Integration'
 
-# Execute testing on push to development and main branches
 on: 
+  # Execute testing on push to development, main, and release branches
   push:
-    branches:
-      - main
-      - release/*
-      - develop
+    branches: ["main", "develop", "release/"]
+  # Execute when pulling to main
+  pull_request:
+    branches: ["main"]
 
 jobs:
   # Test model and api
