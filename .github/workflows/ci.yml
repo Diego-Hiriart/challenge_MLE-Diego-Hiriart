@@ -26,14 +26,10 @@ jobs:
           pip install -r requirements.txt
       # Test model
       - name: test model
-        run: |
-          mkdir reports || true
-          pytest --cov-config=.coveragerc --cov-report term --cov-report html:reports/html --cov-report xml:reports/coverage.xml --junitxml=reports/junit.xml --cov=challenge tests/model
+        run: make model-test
       # Test api
       - name: test api
-        run: |
-          mkdir reports || true
-          pytest --cov-config=.coveragerc --cov-report term --cov-report html:reports/html --cov-report xml:reports/coverage.xml --junitxml=reports/junit.xml --cov=challenge tests/api
+        run: make api-test
   # Build test
   build:
     runs-on: ubuntu-latest
