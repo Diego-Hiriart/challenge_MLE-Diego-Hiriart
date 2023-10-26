@@ -28,8 +28,8 @@ jobs:
       # Install requirements for running and testing
       - name: install dependencies
         run: |
-          pip install --no-cache-dir --upgrade -r /mlediegohiriart/code/requirements.txt
-          pip install --no-cache-dir --upgrade -r /mlediegohiriart/code/requirements.txt
+          pip install --no-cache-dir --upgrade -r requirements.txt
+          pip install --no-cache-dir --upgrade -r requirements-test.txt
       # Test model
       - name: test model
         run: make model-test
