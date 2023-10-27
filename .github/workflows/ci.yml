@@ -3,7 +3,7 @@ name: 'Continuous Integration'
 on: 
   # Execute testing on push to development, main, and release branches
   push:
-    branches: ["main", "develop", "release/*", "feature/*"]
+    branches: ["main", "develop"]
   # Execute when pulling to main
   pull_request:
     branches: ["main", "develop"]
@@ -72,6 +72,7 @@ jobs:
           registry: ${{ env.GAR_LOCATION }}-docker.pkg.dev
       
       - name: Build and Push Container
+        # e.g. [region]-docker.pkg.dev/[project]/[repository]/[image]:[tag]
         run: |-
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
