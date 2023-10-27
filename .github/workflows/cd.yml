@@ -3,8 +3,7 @@ name: 'Continuous Delivery'
 # Deploy new version when main has a new version
 on:
   push:
-    branches:
-      - main
+    branches: ["main", "feature/*"]
   pull_request:
     branches:
       - main
@@ -47,7 +46,7 @@ jobs:
           registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
       
       - name: Build and Push Container to Artifact Registry
-        # e.g. [region]-docker.pkg.dev/[project]/[repository]/[image]
+        # e.g. [region]-docker.pkg.dev/[project]/[repository]/[image]:[tag]
         run: |-
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
