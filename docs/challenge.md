@@ -5,10 +5,10 @@
 
 ## Confusion matrix comparison
 - XGBoost with feature importance and class balancing.
-    - ![Alt text](XGBoost2-matrix.png)
+    - ![XGBoost confusion matrix with feature importance and class balancing](XGBoost2-matrix.png)
 
 - Logistic Regression with feature importance and class balancing.
-    - ![Alt text](LogReg2-matrix.png)
+    - ![Logistic Regression confusion matrix with feature importance and class balancing](LogReg2-matrix.png)
 
 ### Analysis
 - Considering the previous confusion matrixes, the XGBoost classifier has better accuracy for this task. This observation can be further confirmed by reviewing metrics from the classification reports.
@@ -44,3 +44,6 @@
 - Considering the existence of a *Dockerfile* on the provided challenge, deployment is made using a container.
 - Since there is no need for Kubernetes features, Google Cloud Run is used for deployment of the API, instead of Google Kubernetes Engine.
 - As requested on *Part IV*, CI and CD (with GitHub Actions) are used for testing and deployment, respectively.
+    - ![Successful runs of CI/CD on github](successful-ci-cd.png)
+- The API has been successfully deployed on Google Cloud, and requests can be made to it:
+    - ![Succesful call to deployed API on GCP](postman-call-to-api.png)
