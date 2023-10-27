@@ -3,7 +3,8 @@ name: 'Continuous Delivery'
 # Deploy new version when main has a new version
 on:
   push:
-    branches: ["main", "feature/*"]
+    branches: 
+      - "main"
   pull_request:
     branches:
       - main
