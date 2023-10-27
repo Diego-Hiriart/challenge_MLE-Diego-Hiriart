@@ -65,3 +65,21 @@ jobs:
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
+  
+  # Run live stress test
+  stress-test:
+    runs-on: ubuntu-latest
+    steps:
+      # Use ptyhon 3.12
+      - uses: actions/checkout@v4
+      - name: Python set up
+        uses: actions/checkout@v4
+        with: 
+          python-version: '3.12'
+      # Install requirements for running and testing
+      - name: install dependencies
+        run: |
+          pip install --no-cache-dir --upgrade -r requirements.txt
+          pip install --no-cache-dir --upgrade -r requirements-test.txt
+      - name: live stress test
+        run: make stress-test
