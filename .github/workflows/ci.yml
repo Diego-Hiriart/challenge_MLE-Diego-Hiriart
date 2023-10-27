@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Use ptyhon 3.12
-      - uses: actions/checkout@v4
       - name: Python set up
         uses: actions/checkout@v4
         with: 

@@ -18,7 +18,7 @@ env:
 
 #Build and deploy docker on GCP
 jobs:
-  deploy:
+  deploy-and-live-test:
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -66,12 +66,7 @@ jobs:
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
   
-  # Run live stress test
-  stress-test:
-    runs-on: ubuntu-latest
-    steps:
-      # Use ptyhon 3.12
-      - uses: actions/checkout@v4
+      # Preprare stress test
       - name: Python set up
         uses: actions/checkout@v4
         with: 
@@ -81,5 +76,6 @@ jobs:
         run: |
           pip install --no-cache-dir --upgrade -r requirements.txt
           pip install --no-cache-dir --upgrade -r requirements-test.txt
+      # Run live stress test
       - name: live stress test
         run: make stress-test
