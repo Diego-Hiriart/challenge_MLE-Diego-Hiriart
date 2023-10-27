@@ -6,12 +6,12 @@ on:
     branches: ["main", "develop", "release/*", "feature/*"]
   # Execute when pulling to main
   pull_request:
-    branches: ["main"]
+    branches: ["main", "develop"]
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
-  IMAGE: ${{ secrets.IMAGE_NAME }}
+  SERVICE: ${{ secrets.SERVICE }}
   REGION: ${{ secrets.REGION }}
 
 jobs:
@@ -72,7 +72,7 @@ jobs:
       
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}" ./
-          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}"
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
+          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
       # END - Docker auth and build
       
